@@ -6,7 +6,9 @@ const server = require("http").createServer(app);
 
 //start main website on port 80
 const port = process.env.PORT || 3000;
-server.listen(port);
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
 
 // register view engine
 app.set("view engine", "ejs");
