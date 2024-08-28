@@ -7,13 +7,50 @@
     <body>
 
 
-        <div class="container mx-auto">
-            <h1 class="text-5xl font-bold underline">Hello, Tailwind with EJS!</h1>
-            <h1 class="text-red-500">This is a red heading</h1>
-            <h1 class="text-blue-500">This is a blue heading</h1>
-            <h1 class="text-green-500">This is a green heading</h1>
+        <h1 class="text-center text-xl my-4">Hello, Jacob</h1>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+
+            <div role="button" onclick="handleClick()"
+                class="bg-slate-500 rounded-2xl  flex flex-col items-center justify-center min-w-[150px] h-32 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2">
+                <div class="w-full mb-14">
+                    <h1>Membership</h1>
+                    <h1>#0000</h1>
+                </div>
+
+
+            </div>
+            <div role="button" onclick="handleClick()"
+                class="bg-slate-500 rounded-2xl  flex flex-col items-center justify-center min-w-[150px] h-32 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2">
+                <h1>test1</h1>
+                <h1>test2</h1>
+            </div>
+            <div role="button" onclick="handleClick()"
+                class="bg-slate-500 rounded-2xl  flex flex-col items-center justify-center min-w-[150px] h-32 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2">
+                <h1>test1</h1>
+                <h1>test2</h1>
+            </div>
+            <div role="button" onclick="handleClick()"
+                class="bg-slate-500 rounded-2xl  flex flex-col items-center justify-center min-w-[150px] h-32 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2">
+                <h1>test1</h1>
+                <h1>test2</h1>
+            </div>
+
+            <div role="button" onclick="handleClick()"
+                class="bg-slate-500 rounded-2xl flex flex-col items-center justify-center min-w-[312px] h-32 text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium  text-sm px-5 py-2.5 text-center me-2 mb-2">
+                <h1>Check-In</h1>
+            </div>
+
+
+
+
         </div>
 
     </body>
+    <script>
+        function handleClick() {
+            alert('Div clicked!');
+        }
+    </script>
 
 </html>
