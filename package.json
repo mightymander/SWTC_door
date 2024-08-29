@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build:css": "npx tailwindcss -i ./src/CSS/styles.css -o ./public/CSS/styles.css --watch",
-    "devStart": "nodemon app.js"
+    "devStart": "nodemon app.js",
+    "start": "node app.js"
   }
 }
