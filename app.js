@@ -12,6 +12,7 @@ require("dotenv").config();
 
 //initialize passport which is used for authentication
 const initializePassport = require("./passport-config");
+const { error } = require("console");
 initializePassport(passport, get_user_by_email, get_user_by_id);
 
 //express app
@@ -122,11 +123,32 @@ app.post(
 );
 
 app.get("/register", checkNotAuthenticated, (req, res) => {
-  res.render("register");
+  res.render("register", { message: "" });
 });
 
 app.post("/register", checkNotAuthenticated, async (req, res) => {
   console.log(req.body);
+
+  //check if user already exists either by email
+  const existingEmailUser = await get_user_by_email(req.body.email);
+
+  //check if user already exists either by username
+  const existingUsernameUser = await User.findOne({
+    username: req.body.username,
+  });
+
+  if (existingEmailUser && existingUsernameUser) {
+    console.log("Email and username already exist");
+    return res.render("register", {
+      message: "Email and username already exist",
+    });
+  } else if (existingEmailUser) {
+    console.log("Email already exists");
+    return res.render("register", { message: "Email already exists" });
+  } else if (existingUsernameUser) {
+    console.log("Username already exists");
+    return res.render("register", { message: "Username already exists" });
+  }
 
   try {
     const hashedPassword = await bcrpyt.hash(req.body.password, 10);
