@@ -168,3 +168,8 @@ function checkNotAuthenticated(req, res, next) {
   }
   next();
 }
+
+// 404 page, only runs if none of the other functions run
+app.use((req, res) => {
+  res.status(404).render("login");
+});
