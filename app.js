@@ -94,10 +94,6 @@ async function checkout_gym(username) {
   });
 }
 
-//checkin_gym("w");
-checkout_gym("w");
-checkout_gym("w");
-
 //function to get user details by email
 async function get_user_by_email(email) {
   try {
@@ -122,9 +118,6 @@ async function get_users() {
   console.log(users);
 }
 
-//add_user("test2", "test@gmail.com2", "testpassword");
-//get_users();
-
 //start main website on port 3000
 const port = process.env.PORT || 3001;
 server.listen(port, () => {
@@ -135,7 +128,6 @@ server.listen(port, () => {
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-//
 app.use(flash());
 app.use(
   session({
