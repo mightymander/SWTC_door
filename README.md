@@ -9,3 +9,5 @@ Run in development mode
 
 - Nodemon .\app.js
 - npm run build:css
+
+- Next Steps after login

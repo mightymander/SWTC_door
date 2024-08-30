@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bcrpyt = require("bcrypt");
 const User = require("./models/user");
+const gym_user = require("./models/check_ins");
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
@@ -41,6 +42,62 @@ function add_user(username, email, password) {
   });
 }
 
+//function to checkin to gym
+async function checkin_gym(username) {
+  //check if user is already inside gym
+  const user_again = await User.findOne({ username: username });
+  if (user_again.inside_gym) {
+    console.log("User already inside gym");
+    return;
+  }
+
+  //update main user table
+  const user = await User.findOne({ username: username });
+  user.inside_gym = true;
+  user.save().then((result) => {
+    console.log(result);
+
+    //update checkins table (log of who goes in and out of gym)
+    const checkin = new gym_user({
+      username: username,
+      inside_gym: true,
+    });
+    checkin.save().then((result) => {
+      console.log(result);
+    });
+  });
+}
+
+//function to checkout of gym
+async function checkout_gym(username) {
+  //check if user is already outside gym
+  const user_again = await User.findOne({ username: username });
+  if (!user_again.inside_gym) {
+    console.log("User already outside gym");
+    return;
+  }
+
+  //update main user table
+  const user = await User.findOne({ username: username });
+  user.inside_gym = false;
+  user.save().then((result) => {
+    console.log(result);
+
+    //update checkins table (log of who goes in and out of gym)
+    const checkin = new gym_user({
+      username: username,
+      inside_gym: false,
+    });
+    checkin.save().then((result) => {
+      console.log(result);
+    });
+  });
+}
+
+//checkin_gym("w");
+checkout_gym("w");
+checkout_gym("w");
+
 //function to get user details by email
 async function get_user_by_email(email) {
   try {
@@ -61,7 +118,7 @@ async function get_user_by_id(id) {
 
 //function to get all users
 async function get_users() {
-  //const users = await User.find();
+  const users = await User.find();
   console.log(users);
 }
 
@@ -107,11 +164,7 @@ app.use(express.static("public"));
 app.get("/login", checkNotAuthenticated, (req, res) => {
   res.render("login");
 });
-app.use((req, res, next) => {
-  console.log("Session:", req.session);
-  console.log("User:", req.user);
-  next();
-});
+
 app.post(
   "/login",
   checkNotAuthenticated,
