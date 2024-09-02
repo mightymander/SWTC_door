@@ -13,4 +13,12 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-module.exports = { checkAuthenticated, checkNotAuthenticated };
+function checkAdmin(req, res, next) {
+  console.log(req.user.is_admin);
+  if (req.user.is_admin === true) {
+    return next();
+  }
+  res.redirect("/");
+}
+
+module.exports = { checkAuthenticated, checkNotAuthenticated, checkAdmin };

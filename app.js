@@ -13,6 +13,7 @@ const { initializePassport } = require("./config/passport-config");
 const connectDB = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 const gymRoutes = require("./routes/gymRoutes");
+const { checkAdmin } = require("./controllers/authController");
 
 const app = express();
 const server = require("http").createServer(app);
