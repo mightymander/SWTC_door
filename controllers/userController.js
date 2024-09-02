@@ -29,14 +29,26 @@ async function make_user_admin_email(email) {
   console.log("User is now an admin");
 }
 
-async function list_all_users() {
+async function get_all_users() {
   const users = await User.find();
   return users;
 }
 
-async function list_all_users_inside_gym() {
+async function get_all_users_in_gym() {
   const users = await User.find({ inside_gym: true });
   return users;
+}
+
+async function generate_list_of_usernames_in_gym() {
+  const users = await User.find({ inside_gym: true });
+  const usernames = users.map((user) => user.username);
+  return usernames;
+}
+
+async function generate_list_of_all_usernames() {
+  const users = await User.find();
+  const usernames = users.map((user) => user.username);
+  return usernames;
 }
 
 //console log all users inside gym using lust_all_users_inside_gym
@@ -49,6 +61,8 @@ module.exports = {
   get_user_by_id,
   get_users,
   make_user_admin_email,
-  list_all_users,
-  list_all_users_inside_gym,
+  get_all_users,
+  get_all_users_in_gym,
+  generate_list_of_usernames_in_gym,
+  generate_list_of_all_usernames,
 };
