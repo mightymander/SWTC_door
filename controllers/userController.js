@@ -1,6 +1,7 @@
 // controllers/userController.js
 const { list } = require("postcss");
 const User = require("../models/user");
+const { get } = require("mongoose");
 
 async function get_user_by_email(email) {
   try {
@@ -51,6 +52,34 @@ async function generate_list_of_all_usernames() {
   return usernames;
 }
 
+async function generate_users_in_gym() {
+  const users = await User.find({ inside_gym: true });
+  const users_in_gym = users.map((user) => ({
+    username: user.username,
+    time_elapsed_inside_gym: user.time_elapsed_inside_gym, // Assuming you have this field in your database
+  }));
+  return users_in_gym;
+}
+
+async function update_time_elapsed_inside_gym() {
+  const users = await User.find({ inside_gym: true });
+  users.forEach((user) => {
+    user.time_elapsed_inside_gym = Date.now() / 1000 - user.time_entered_gym;
+    user.save();
+  });
+}
+
+function formatTimeElapsed(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  } else {
+    return `${minutes}m`;
+  }
+}
+
 //console log all users inside gym using lust_all_users_inside_gym
 //list_all_users_inside_gym().then((result) => {
 //  console.log(result);
@@ -65,4 +94,7 @@ module.exports = {
   get_all_users_in_gym,
   generate_list_of_usernames_in_gym,
   generate_list_of_all_usernames,
+  generate_users_in_gym,
+  update_time_elapsed_inside_gym,
+  formatTimeElapsed,
 };

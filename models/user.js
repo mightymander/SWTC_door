@@ -7,6 +7,8 @@ const userSchema = Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     inside_gym: { type: Boolean, required: true, default: false },
+    time_entered_gym: { type: Number, required: false, default: null },
+    time_elapsed_inside_gym: { type: Number, required: true, default: 0 },
     is_admin: { type: Boolean, required: true, default: false },
   },
   { timestamps: true }

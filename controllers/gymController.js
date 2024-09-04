@@ -10,6 +10,7 @@ async function checkin_gym(username) {
   }
 
   user.inside_gym = true;
+  user.time_entered_gym = Date.now() / 1000;
   await user.save();
 
   const checkin = new GymUser({ username: username, inside_gym: true });
@@ -25,6 +26,8 @@ async function checkout_gym(username) {
   }
 
   user.inside_gym = false;
+  user.time_entered_gym = 0;
+  user.time_elapsed_inside_gym = 0;
   await user.save();
 
   const checkout = new GymUser({ username: username, inside_gym: false });

@@ -9,6 +9,7 @@ router.get("/", checkAuthenticated, (req, res) => {
   res.render("index", {
     name: req.user.username,
     inside_gym: req.user.inside_gym,
+    is_admin: req.user.is_admin,
   });
 });
 
